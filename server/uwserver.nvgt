@@ -2207,7 +2207,6 @@ void setupserver() {
 	add_to_store("wood", 500, "diy_store");
 	add_to_store("concrete", 1200, "diy_store");
 	add_to_store("iron_shovel", 230, "diy_store");
-	add_to_store("water_pouch", 28, "survival_store");
 	add_to_store("bottle_of_cleanwater", 1841, "survival_store");
 	add_to_store("net", 500, "survival_store");
 	add_to_store("string", 150, "survival_store");
