@@ -19,6 +19,8 @@ void combine(player@p, string message) {
 			p.inv_add_item("knife", -2);
 			send_reliable(p, "hempty 1", 0);
 			send_reliable(p, "hempty 2", 0);
+		} else if (lefthand == "" and righthand == "") {
+			send_packet(6, "play clap.ogg " + p.x + " " + p.y + " " + p.z, p.x, p.y, p.z, maps[get_map_index(p.map)]);
 		} else if (string_contains(lefthand, "bag_of_", 1) > -1 and righthand == "" or lefthand == "" and string_contains(righthand, "bag_of_", 1) > -1) {
 			string cid;
 			if (string_contains(lefthand, "bag_of_", 1) > -1) cid = string_right(lefthand, 5);
@@ -159,13 +161,6 @@ void combine(player@p, string message) {
 				send_packet(6, "play lighterempty.ogg " + p.x + " " + p.y + " " + p.z, p.x, p.y, p.z, maps[get_map_index(p.map)]);
 				p.health -= random(100, 140);
 			}
-		}
-		else if(lefthand=="" and righthand=="" or lefthand=="" and righthand=="")
-		{
-		if(p.waitingtimer.elapsed>=100 )
-		{
-		send_packet(6,"play clap.ogg "+p.x+" "+p.y+" "+p.z, p.x,p.y,p.z,maps[get_map_index(p.map)]);
-		}
 		}
 		/*
 		else if(lefthand=="glass" and righthand=="" or lefthand=="" and righthand=="glass")
