@@ -127,6 +127,9 @@ void gameloop() {
 	}
 	if (key_up(KEY_LMENU) and key_up(KEY_RMENU) and key_up(KEY_LSHIFT) and key_up(KEY_RSHIFT) and key_up(KEY_INSERT) and key_pressed(KEY_F1))
 		send_reliable(peer_id, "whoonline", 0);
+		if (alt_is_down() and key_pressed(KEY_F)) {
+		team_menu();
+		}
 	if (alt_is_down() and key_up(KEY_LSHIFT) and key_up(KEY_RSHIFT) and key_pressed(KEY_F1))
 		get_voice_menu();
 	if (key_up(KEY_LSHIFT) and key_up(KEY_RSHIFT) and key_up(KEY_LMENU) and key_up(KEY_RMENU) and key_pressed(KEY_F7)) {

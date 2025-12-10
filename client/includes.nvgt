@@ -1,4 +1,5 @@
 #include "includes/inv.nvgt"
+#include "includes/team_menu.nvgt"
 #include "includes/lg.nvgt"
 #include "includes/form_menu.nvgt"
 #include "includes/learn_game_sounds_menu.nvgt"
