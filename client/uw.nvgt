@@ -364,6 +364,7 @@ void main() {
 	create_buffer("local chats");
 	create_buffer("team chats");
 	create_buffer("teamn", "Team Notifications");
+	create_buffer("team events");
 	create_buffer("lcm chats");
 	create_buffer("astc", "Assistant Chats");
 	create_buffer("admin chats");
@@ -1436,6 +1437,10 @@ void netloop() {
 				} else if (parsed[0] == "teamchat") {
 					if (buffer_active("team chats") == 1) {
 						add_buffer_item("team chats", string_replace(get_event_message(), parsed[0] + " ", "", false));
+					}
+				} else if (parsed[0] == "teamevent") {
+					if (buffer_active("team events") == 1) {
+						add_buffer_item("team events", string_replace(get_event_message(), parsed[0] + " ", "", false));
 					}
 				} else if (parsed[0] == "admintells") {
 					if (buffer_active("admintells") == 1) {
