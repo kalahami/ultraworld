@@ -1,0 +1,68 @@
+void team_menu() {
+	audio_form f;
+	f.reset();
+	f.create_window("Team menu", false);
+	int a = f.create_button("&Check the stats of your team");
+	string cmds ="Here are all the arguments you can use to view your team's stats.\n"
+		"kills: Shows the total number of kills your team has\n"
+		"points: Shows how many points your team has\n"
+		"all: Sends you a list with all teams from the server\n"
+		"leave: If you are not the leader leaves the team\n"
+		"yes: Accept a team invitation\n"
+		"no: Refuse a team invitation";
+	int b = f.create_input_box("Viewing arguments", cmds, "", 0, true,multiline=true);
+	int c=f.create_button("&Join in a team");
+	int d = f.create_button("&Close this menu", false, true);
+	f.focus(a);
+	while (true) {
+		f.monitor();
+		wait(5);
+mainloop();
+		if (f.is_pressed(a)) {
+		string result = input("Field","Check what?").lower().trim_whitespace();
+			if (result == "") {
+				speak("You can't send an empty command.");
+				f.focus(a);
+				continue;
+			}
+			if (result == "yes") {
+				send_reliable(peer_id, "/ati", 1);
+				continue;
+			}
+			if (result == "no") {
+				send_reliable(peer_id, "/rti", 1);
+				continue;
+			}
+			if (result == "all") {
+				send_reliable(peer_id, "/teams", 1);
+				continue;
+			}
+			if (result == "leave") {
+				send_reliable(peer_id, "/teamleave", 1);
+				continue;
+			}
+			array<string> valid = {"kills", "points"};
+			if (valid.find(result) > -1) {
+				send_reliable(peer_id, "/team" + result, 1);
+				continue;
+			}
+			speak("Invalid command");
+			break;
+		}
+		if (f.is_pressed(c)) {
+		string name=input("Team ID","Type the team ID");
+		string pw=input("Team password","Type the team password");
+		if (name=="" and pw=="") {
+		speak("Canceled");
+		break;
+		}
+		send_reliable(peer_id,"/jointeam "+name+" "+pw+"",1);
+		f.focus(a);
+		continue;
+		}
+		if (f.is_pressed(d)) {
+			speak("Closed");
+			break;
+		}
+	}
+}
