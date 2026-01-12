@@ -38,6 +38,8 @@ void load_map(string mdata) {
 			}
 			else if (parsed[0] == "url" && parsed.length() > 1) {
 				comurl = true;
+				// Route the raw stream through the main pool mixer so reverb FX can be applied.
+				if (@mpool.mixer != null) stream.set_mixer(mpool.mixer);
 				stream.load(string_trim_left(ld, 4));
 				stream.volume = volumestream;
 				stream.play();
